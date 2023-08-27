@@ -1,7 +1,7 @@
 
 resource "azurerm_monitor_diagnostic_setting" "diagnostics" {
   lifecycle {
-    ignore_changes = [log, metric]
+    ignore_changes = [enabled_log, metric]
   }
   for_each           = var.diag_object == null ? {} : var.diag_object
   name               = module.diagnostic_name.naming_convention_output[each.key].names.0
@@ -11,14 +11,14 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostics" {
   log_analytics_workspace_id     = var.log_analytics_workspace_id
   log_analytics_destination_type = lookup(each.value, "log_analytics_destination_type", null)
 
-  dynamic "log" {
-    for_each = each.value.log == null ? [] : each.value.log
+  dynamic "enabled_log" {
+    for_each = each.value.enabled_log  == null ? [] : each.value.enabled_log 
     content {
-      category = log.value[0]
-      enabled  = log.value[1]
+      category = enabled_log.value[0]
+      enabled  = enabled_log.value[1]
       retention_policy {
-        enabled = log.value[2]
-        days    = log.value[3]
+        enabled = enabled_log.value[2]
+        days    = enabled_log.value[3]
       }
     }
   }
