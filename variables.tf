@@ -7,8 +7,8 @@ variable "diag_object" {
   description = "(Required) Contains the diagnostics setting object."
   type = map(object({
     resource_id = list(string)
-    enabled_log = list(tuple([string, bool, bool, number]))
-    metric      = list(tuple([string, bool, bool, number]))
+    enabled_log = list(tuple([string, bool, number]))
+    metric      = list(tuple([string, bool, number]))
   }))
 }
 
