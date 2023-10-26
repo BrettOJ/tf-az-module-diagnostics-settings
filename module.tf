@@ -15,11 +15,6 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostics" {
     for_each = each.value.enabled_log  == null ? [] : each.value.enabled_log 
     content {
       category = enabled_log.value[0]
-      #enabled  = enabled_log.value[1]
-      retention_policy {
-        enabled = enabled_log.value[1]
-        days    = enabled_log.value[2]
-      }
     }
   }
 
@@ -28,10 +23,6 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostics" {
     content {
       category = metric.value[0]
       #enabled  = metric.value[1]
-      retention_policy {
-        enabled = metric.value[1]
-        days    = metric.value[2]
-      }
     }
   }
 }
