@@ -22,7 +22,6 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostics" {
     for_each = each.value.metric == null ? [] : each.value.metric
     content {
       category = metric.value[0]
-      #enabled  = metric.value[1]
     }
   }
 }
