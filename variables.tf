@@ -34,7 +34,7 @@ variable "tags" {
 }
 
 variable "dependencies" {
-  type        = list(string)
+  type        = string
   description = "List of dependecies modules or resources"
   default     = null
 }
